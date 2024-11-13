@@ -79,6 +79,66 @@ fn tldr() {
 
         square(x) * square(y)
     };
+
+    // if statement
+    if q != 0 {
+        println!("uhuh");
+    } else if p == 144 {
+        println!("nuhuh");
+    } else {
+        return;
+    }
+
+    // ternary operator equivalent
+    let r = if p != 144 { "puh" } else { "guh" };
+
+    // infinite loop
+    let mut s = 0;
+    loop {
+        s += 1;
+
+        if s > 5 {
+            break;
+        }
+    }
+
+    // can also return values from loops
+    // and give them labels
+    s = 0;
+    let t = 'some_loop: loop {
+        loop {
+            s += 1;
+
+            if s > 5 {
+                break 'some_loop s;
+            }
+        }
+    };
+
+    // while loop
+    s = 0;
+    while s <= 5 {
+        s += 1;
+    }
+
+    // for loop
+    // can only iterate through collections (like a foreach)
+    let u = [100, 500, 300, 1000];
+    for x in u {
+        println!("{x}");
+    }
+
+    // more 'traditional' for loop can be made with a range
+    // ranges can only go up
+    // min is inclusive, max is exclusive
+    for x in (1..10) {
+        println!("{}", -x);
+    }
+
+    // can count down by reversing the range
+    for x in (50..100).rev() {
+        println!("{}", square(x));
+    }
 }
 
 // parameters need an explicit type

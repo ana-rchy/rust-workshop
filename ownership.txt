@@ -1,0 +1,4 @@
+rust has no garbage collector, but it doesnt manage memory in the same way as c/c++
+it uses something called 'ownership' in order to figure out when/how memory should be allocated and freed
+
+
