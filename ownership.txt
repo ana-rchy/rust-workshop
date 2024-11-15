@@ -23,3 +23,37 @@ println!("{b}"});
 
 the 'str' type is a string literal, which is hardcoded into the program itself, meaning that it cant be mutated
 the 'String' type is stored on the heap, meaning it can be mutated
+in order to be mutable, 'String' stores info such as the length of the string, the capacity (how much memory is allocated for it), and the pointer to the string itself
+constantly copying full string values isnt efficient, so its usually better to use pointers when possible. therefore 'String' doesnt implement 'Copy'
+
+when variables go out of scope, rust automatically calls a free function on them: `drop`
+if you did:
+let s1 = String::from("asdasd");
+let s2 = s1;
+and it simply copied the pointer in s1 to s2, when s1 and s2 go out of scope, `drop` is called on both of them. freeing the same memory twice is very bad and leads to undefined behaviour and/or memory corruption
+therefore, to avoid this, it 'moves' the value of s1 into s2, by copying the length, capacity, and pointer into s2, and invalidating s1
+
+if you wanna copy the full value anyways for types that dont implement `Copy`, you can do
+let s1 = "meow":
+let s2 = s1.clone();
+
+functions work similarly. if you pass in a non-`Copy` variable, the function takes ownership of it
+if a value is created in a function and returns it, you then instead take ownership of it
+so you can pass in a value, and return it in order to not lose ownership
+
+alternatively...
+
+
+REFERENCES
+rather than passing and returning a value, you can simply pass in a pointer/reference to it
+you can also dereference manually, but this is usually not needed due to rust having an auto-dereference system
+
+references are also immutable by default, but you can have as many immutable references as you want
+on the other hand, a mutable reference forces all other references to be invalidated. this is because of an expectation for immutable references to point to data that wont change; so a mutable reference means no immutable references
+it also means no mutable references, as any other mutable references expect their data to not have randomly changed
+
+there can only ever be one mutable reference, or as many immutable references as you want
+
+if you return from a function, a reference to data which gets freed at the end of it, that causes a dangling reference (pointing to freed data). therefore, the compiler throws an error when this is spotted
+
+sidenote: a `str` cant actually be used on its own. as a `str` refers to a string hardcoded into the program, the only thing the code can actually use is a `&str`

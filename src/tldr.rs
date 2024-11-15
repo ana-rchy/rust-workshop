@@ -131,7 +131,7 @@ fn tldr() {
     // more 'traditional' for loop can be made with a range
     // ranges can only go up
     // min is inclusive, max is exclusive
-    for x in (1..10) {
+    for x in 1..10 {
         println!("{}", -x);
     }
 
