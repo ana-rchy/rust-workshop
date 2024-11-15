@@ -1,4 +1,25 @@
 rust has no garbage collector, but it doesnt manage memory in the same way as c/c++
 it uses something called 'ownership' in order to figure out when/how memory should be allocated and freed
 
+every variable 'owns' the value inside of it
+when the value is assigned to another variable, it gets moved, and the previous variable no longer can use it
+e.g.
+let a = "hello";
+let b = a; // moved from a into b
+// valid
+println!("{b}");
+// invalid
+println!("{a}");
 
+this behaviour changes if a type has the 'Copy' trait (more on traits later)
+all primitive types (integers, floats, bool, etc) have this trait
+e.g.
+let a = 1;
+let b = a; // copied from a into b, not moved
+// valid
+println!("{a}");
+// also valid
+println!("{b}"});
+
+the 'str' type is a string literal, which is hardcoded into the program itself, meaning that it cant be mutated
+the 'String' type is stored on the heap, meaning it can be mutated
